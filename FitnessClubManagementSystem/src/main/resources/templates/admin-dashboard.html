@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fef7f8;
+            font-family: 'Arial', sans-serif;
+            color: #588b8b;
+        }
+        .dashboard-container {
+            max-width: 700px;
+            margin: 50px auto;
+            text-align: center;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .logout {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .logout button {
+            background-color: #ff6fbf;
+            color: #ffffff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .logout button:hover {
+            background-color: #ffd5c2;
+            color: #588b8b;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            position: relative;
+        }
+        .rainbow-text {
+            font-weight: bold;
+            font-size: 3rem;
+            background: linear-gradient(
+                    90deg,
+                    #ff6b6b,
+                    #ff8e53,
+                    #ffd700,
+                    #3cb371,
+                    #1e90ff,
+                    #8a2be2,
+                    #ff6b6b
+            );
+            background-size: 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow-shine 2s infinite linear;
+        }
+        .btn-primary {
+            background-color: #588b8b;
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 10px 20px;
+            margin: 10px;
+        }
+        .btn-primary:hover {
+            background-color: #ffd5c2;
+            color: #588b8b;
+        }
+        @keyframes rainbow-shine {
+            0% {
+                background-position: 0%;
+            }
+            100% {
+                background-position: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container dashboard-container">
+    <div class="logout">
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    <h1>
+        <span class="rainbow-text">Admin</span> Dashboard 🎀
+    </h1>
+    <p>Manage members, trainers, and schedules with ease!</p>
+    <a href="/admin/members" class="btn btn-primary">Manage Members</a>
+    <a href="/admin/trainers" class="btn btn-primary">Manage Trainers</a>
+    <a href="/admin/schedules" class="btn btn-primary">Manage Schedules</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Schedule Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fef7f8;
+            font-family: 'Arial', sans-serif;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #588b8b;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #588b8b;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background-color: #ffd5c2;
+            color: #588b8b;
+        }
+    </style>
+</head>
+<body>
+<div class="container form-container">
+    <h2 th:text="${schedule.id == null ? 'Add Schedule 🎀' : 'Edit Schedule 🎀'}"></h2>
+    <form th:action="@{/admin/schedules/save}" th:object="${schedule}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="mb-3">
+            <label for="day" class="form-label">Day</label>
+            <input type="text" class="form-control" id="day" th:field="*{day}" required>
+        </div>
+        <div class="mb-3">
+            <label for="timeSlot" class="form-label">Time Slot</label>
+            <input type="text" class="form-control" id="timeSlot" th:field="*{timeSlot}" required>
+        </div>
+        <div class="mb-3">
+            <label for="activity" class="form-label">Activity</label>
+            <input type="text" class="form-control" id="activity" th:field="*{activity}" required>
+        </div>
+        <div class="mb-3">
+            <label for="trainer" class="form-label">Trainer</label>
+            <select class="form-select" id="trainer" th:field="*{trainer.id}" required>
+                <option value="" disabled>Select a trainer</option>
+                <option th:each="trainer : ${trainers}" th:value="${trainer.id}" th:text="${trainer.name}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="member" class="form-label">Member</label>
+            <select class="form-select" id="member" th:field="*{member.id}" required>
+                <option value="" disabled>Select a member</option>
+                <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Save</button>
+    </form>
+    <a href="/admin/schedules" class="btn btn-secondary mt-3">Back to Schedules</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
